@@ -1,0 +1,5 @@
+https://github.com/smathermather/labr-pdal
+
+zusätzlich:
+sudo apt-get install libboost-all-dev
+
