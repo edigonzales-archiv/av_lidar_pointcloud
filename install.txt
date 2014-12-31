@@ -8,3 +8,9 @@ sudo apt-get install libboost-all-dev
 
 neu (momentan) laszip error -> installieren
 http://scigeo.org/articles/howto-install-latest-geospatial-software-on-linux.html#compile_laszip (aber analog wie z.b. qgis etc. nur build und in /usr/local ld_librarypath notwendi..)
+
+
+wget http://download.osgeo.org/laszip/laszip-2.1.0.tar.gz
+
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
+
