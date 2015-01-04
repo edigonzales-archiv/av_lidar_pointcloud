@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Pipeline version="1.0">
+  <Writer type="writers.pgpointcloud">
+    <Option name="connection">dbname='rosebud2' user='stefan' password='ziegler12'</Option>
+    <Option name="schema">av_lidar_2014</Option>        
+    <Option name="table">lidar</Option>    
+    <Option name="overwrite">false</Option>
+    <Option name="srid">21781</Option>
+    <Filter type="filters.chipper">
+      <Option name="capacity">400</Option>
+        <Reader type="readers.las">
+          <Option name="filename">/home/stefan/Geodaten/lidar_part1/MY_LAZ_FILE</Option>
+          <Option name="spatialreference">EPSG:21781</Option>
+        </Reader>
+    </Filter>
+  </Writer>
+</Pipeline>

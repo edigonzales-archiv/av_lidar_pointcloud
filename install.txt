@@ -14,3 +14,7 @@ wget http://download.osgeo.org/laszip/laszip-2.1.0.tar.gz
 
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
+/usr/local/bin/
+
+
+PDAL: -DCMAKE_BUILD_TYPE=Release (geht viel schneller so)
