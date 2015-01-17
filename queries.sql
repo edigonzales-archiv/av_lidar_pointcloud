@@ -57,7 +57,6 @@ SELECT
   id
 FROM av_lidar_2014.lidar;
 
-
 ALTER TABLE av_lidar_2014.lidar_patches ADD PRIMARY KEY (id);
 
 ALTER TABLE av_lidar_2014.lidar_patches OWNER TO stefan;

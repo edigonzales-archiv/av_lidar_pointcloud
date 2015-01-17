@@ -1,0 +1,53 @@
+-- rechteck intersection von lfp
+
+"Nested Loop  (cost=30.22..34841579.21 rows=22438777 width=40)"
+"  Join Filter: st_intersects(st_buffer(fixpunktekategorie__lfp.geometrie, 0.2::double precision), st_geomfromewkb(pc_envelope(lidar.pa)))"
+"  ->  Seq Scan on lidar  (cost=0.00..4222.17 rows=257917 width=36)"
+"  ->  Materialize  (cost=30.22..1153.29 rows=261 width=68)"
+"        ->  Bitmap Heap Scan on fixpunktekategorie__lfp  (cost=30.22..1151.99 rows=261 width=68)"
+"              Recheck Cond: (geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+"              Filter: _st_intersects(geometrie, '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+"              ->  Bitmap Index Scan on idx_lidar_fixpunktekategorie__lfp_geometrie  (cost=0.00..30.15 rows=783 width=0)"
+"                    Index Cond: (geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+
+-- rechteck intersection von lfp mit &&
+
+"Nested Loop  (cost=4.42..671641.34 rows=429862 width=40)"
+"  Join Filter: st_intersects(st_buffer(fixpunktekategorie__lfp.geometrie, 0.2::double precision), st_geomfromewkb(pc_envelope(lidar.pa)))"
+"  ->  Seq Scan on lidar  (cost=0.00..4222.17 rows=257917 width=36)"
+"  ->  Materialize  (cost=4.42..58.94 rows=5 width=68)"
+"        ->  Bitmap Heap Scan on fixpunktekategorie__lfp  (cost=4.42..58.92 rows=5 width=68)"
+"              Recheck Cond: ((geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry) AND ( (...)"
+"              Filter: _st_intersects(geometrie, '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+"              ->  Bitmap Index Scan on idx_lidar_fixpunktekategorie__lfp_geometrie  (cost=0.00..4.42 rows=14 width=0)"
+"                    Index Cond: ((geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry) A (...)"
+
+-- Distance = 0
+
+"Nested Loop  (cost=30.15..539264.25 rows=343889 width=40)"
+"  Join Filter: st_intersects(st_buffer(fixpunktekategorie__lfp.geometrie, 0.2::double precision), st_geomfromewkb(pc_envelope(lidar.pa)))"
+"  ->  Seq Scan on lidar  (cost=0.00..4222.17 rows=257917 width=36)"
+"  ->  Materialize  (cost=30.15..1153.90 rows=4 width=68)"
+"        ->  Bitmap Heap Scan on fixpunktekategorie__lfp  (cost=30.15..1153.88 rows=4 width=68)"
+"              Recheck Cond: (geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+"              Filter: (st_distance(geometrie, '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry) =  (...)"
+"              ->  Bitmap Index Scan on idx_lidar_fixpunktekategorie__lfp_geometrie  (cost=0.00..30.15 rows=783 width=0)"
+"                    Index Cond: (geometrie && '010300002015550000010000000500000000000000308622410000000040F40B4100000000A09D22410000000040F40B4100000000A09D224100000000C0320C41000000003086224100000000C0320C4100000000308622410000000040F40B41'::geometry)"
+
+
+
+-- mit ogc_fid = xxxx
+
+"Nested Loop  (cost=0.29..137057.73 rows=85972 width=40)"
+"  Join Filter: st_intersects(st_buffer(fixpunktekategorie__lfp.geometrie, 0.2::double precision), st_geomfromewkb(pc_envelope(lidar.pa)))"
+"  ->  Index Scan using fixpunktekategorie__lfp_pkey on fixpunktekategorie__lfp  (cost=0.29..8.31 rows=1 width=68)"
+"        Index Cond: (ogc_fid = 72013)"
+"  ->  Seq Scan on lidar  (cost=0.00..4222.17 rows=257917 width=36)"
+
+-- ohne WHERE
+
+"Nested Loop  (cost=0.00..5877569818.37 rows=3729565419 width=40)"
+"  Join Filter: st_intersects(st_buffer(fixpunktekategorie__lfp.geometrie, 0.2::double precision), st_geomfromewkb(pc_envelope(lidar.pa)))"
+"  ->  Seq Scan on fixpunktekategorie__lfp  (cost=0.00..1343.81 rows=43381 width=68)"
+"  ->  Materialize  (cost=0.00..7526.76 rows=257917 width=36)"
+"        ->  Seq Scan on lidar  (cost=0.00..4222.17 rows=257917 width=36)"

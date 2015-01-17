@@ -9,7 +9,7 @@
     <Filter type="filters.chipper">
       <Option name="capacity">400</Option>
         <Reader type="readers.las">
-          <Option name="filename">/home/stefan/Geodaten/lidar_part1/MY_LAZ_FILE</Option>
+          <Option name="filename">/home/stefan/Downloads/laz/MY_LAZ_FILE</Option>
           <Option name="spatialreference">EPSG:21781</Option>
         </Reader>
     </Filter>

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-BASEPATH=/home/stefan/Geodaten/lidar_part1/
+BASEPATH=/home/stefan/Downloads/laz/
 
 for FILE in ${BASEPATH}*.laz
 do
