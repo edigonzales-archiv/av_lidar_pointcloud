@@ -16,5 +16,8 @@ export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 
 /usr/local/bin/
 
+wget http://download.osgeo.org/liblas/libLAS-1.8.0.tar.bz2
+http://www.liblas.org/compilation.html#using-unix-makefiles-on-linux
+
 
 PDAL: -DCMAKE_BUILD_TYPE=Release (geht viel schneller so)
